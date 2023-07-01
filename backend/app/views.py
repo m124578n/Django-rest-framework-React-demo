@@ -7,8 +7,6 @@ from drf_spectacular.utils import extend_schema
 from .serializers import UserRegisterSerializer, UserLoginSerializer
 
 
-
-
 class RegisterView(APIView):
 
     @extend_schema(
@@ -24,21 +22,22 @@ class RegisterView(APIView):
             user_serializer = UserRegisterSerializer(user)
             return Response(
                 {
-                    'message':'register success',
-                    'user':user_serializer.data,
+                    'message': 'register success',
+                    'user': user_serializer.data,
                 },
                 status=status.HTTP_201_CREATED,
-                )
+            )
         else:
             errors = serializer.errors
             return Response(
                 {
-                    'message':'Bad request',
-                    'errors':errors,
+                    'message': 'Bad request',
+                    'errors': errors,
                 },
                 status=status.HTTP_400_BAD_REQUEST,
-                )
-        
+            )
+
+
 class UserLoginView(APIView):
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data)
@@ -71,5 +70,3 @@ class UserLoginView(APIView):
                 {"message": "Invalid credentials."},
                 status=status.HTTP_401_UNAUTHORIZED,
             )
-        
-        

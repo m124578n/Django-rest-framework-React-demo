@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "django-rest-framework-react-demo"
+version = "0.1.0"
+description = ""
+authors = ["Chi <m23568n@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_rest_framework_react_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.2"
+django-cors-headers = "^4.1.0"
+djangorestframework = "^3.14.0"
+django-filter = "^23.2"
+djangorestframework-simplejwt = "^5.2.2"
+pygments = "^2.15.1"
+drf-spectacular = "^0.26.3"
+markdown = "^3.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
