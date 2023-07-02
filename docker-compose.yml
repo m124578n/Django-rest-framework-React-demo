@@ -6,10 +6,10 @@ services:
     volumes:
       - ./backend:/backend
     command: > 
-      bash -c "pip3 install -r requirements.txt"
-      bash -c "python manage.py makemigrations"
-      bash -c "python manage.py migrate"
-      bash -c "python manage.py runserver 0.0.0.0:8000"
+      bash -c "pip3 install -r requirements.txt;"
+      python manage.py makemigrations;
+      python manage.py migrate;
+      python manage.py runserver 0.0.0.0:8000;"
 
   web:
     build: ./frontend
@@ -18,5 +18,5 @@ services:
     volumes:
       - ./frontend:/frontend
     command: >
-      bash -c "npm install"
-      bash -c "npm start"
+      bash -c "npm install;
+      npm start;"
