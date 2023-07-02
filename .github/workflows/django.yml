@@ -27,4 +27,5 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
+        cd /home/runner/work/Django-rest-framework-React-demo/Django-rest-framework-React-demo/backend
         python manage.py test
