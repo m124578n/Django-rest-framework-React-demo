@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block body %}
+<style>
+    .login {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-align: center;
+        -ms-flex-pack: center;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+</style>
+    <div class="login">
+        <form class="form-signin">
+            <!-- @csrf -->
+            <!-- <img class="mb-4" src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=436&q=80" alt="" width="72"> -->
+            <h1 class="h3 mb-3 font-weight-normal">請輸入使用者名稱及密碼登入</h1>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="text" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" name="passowrd" class="form-control" placeholder="Password" required>
+            <div style="padding-top: 10px;">
+                <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">登入</button>
+            </div>
+            <div style="padding-top: 10px;">
+                <a href="/register">註冊</a>
+            </div>
+            <p class="mt-5 mb-3 text-muted">© 2023 測試測試</p>
+        </form>
+    </div>
+<script>
+    function getCookie(name) {
+        let cookie = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return cookie ? cookie[2] : null;
+    }
+
+    function login(){
+
+        var username = $('#inputEmail').val()
+        var password = $('#inputPassword').val()
+        var myData = {
+            username: username,
+            password: password
+        }
+
+        fetch('http://127.0.0.1:8000/api/login/', {
+            method: 'POST',
+            credentials: "same-origin",
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(myData)
+        })
+        .then(response => {
+            result = response.json()
+            status_code = response.status;
+            if(status_code == 200) {
+                // 處理成功的code 否則全拋else
+                result.then(data => {
+                    alert(data.user.username)
+                })
+                console.log(result)
+            }else{
+                result.then(data => {
+                    alert(data.errors.username[0])
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+</script>
+{% endblock  %}
