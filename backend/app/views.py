@@ -49,7 +49,10 @@ class UserLoginView(APIView):
         else:
             errors = serializer.errors
             return Response(
-                {"message": "Bad Request.", "errors": errors},
+                {
+                    "message": "Bad Request.", 
+                    "errors": errors
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
         if user:
@@ -67,7 +70,9 @@ class UserLoginView(APIView):
             )
         else:
             return Response(
-                {"message": "Invalid credentials."},
+                {
+                    "message": "Invalid credentials."
+                },
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
